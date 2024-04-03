@@ -16,53 +16,60 @@
         <title>Users</title>
     </head>
     <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="jumbotron">
-                    <h1>Welcome to admin page, <a sec:authentication="name">User</a></h1>
-                    <div align="center">
-                        <table class="table table-dark table-hover table-striped table-sm">
-                            <caption>Список пользователей</caption>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Age</th>
-                                    <th>Role</th>
-                                    <th>Edit user</th>
-                                    <th>Delete user</th>
-                                </tr>
-                            <tboby>
-                                <tr th:each="user : ${usersList}">
-                                    <th th:text="${user.name}">VALUE</th>
-                                    <th th:text="${user.surname}">VALUE</th>
-                                    <th th:text="${user.age}">VALUE</th>
-                                    <th th:text="${user.roles}">VALUE</th>
+        <ul class="nav nav-tabs"> <!--табы-->
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Пользователи</a>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="jumbotron">
+                                <h1>Welcome to admin page, <span class="badge bg-secondary" sec:authentication="name">User</span></h1>
+                                <table class="table table-light table-hover table-striped table-sm caption-top">
+                                    <caption>Список пользователей</caption>
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Age</th>
+                                        <th>Role</th>
+                                        <th>Edit user</th>
+                                        <th>Delete user</th>
+                                    </tr>
+                                    </thead>
+                                    <tboby>
+                                        <tr th:each="user : ${usersList}">
+                                            <th th:text="${user.name}">VALUE</th>
+                                            <th th:text="${user.surname}">VALUE</th>
+                                            <th th:text="${user.age}">VALUE</th>
+                                            <th th:text="${user.roles}">VALUE</th>
 
-                                    <th>
-                                        <a th:href="@{/edit?id={id}(id=${user.id})}">Edit</a>
-                                    </th>
+                                            <th>
+                                                <a th:href="@{/edit?id={id}(id=${user.id})}">Edit</a>
+                                            </th>
 
-                                    <th>
-                                        <form th:method="POST" th:action="@{/admin/delete?id={id}(id=${user.getId()})}" th:object="${user}">
-                                            <input type="submit" value="Delete"/>
-                                        </form>
-                                    </th>
-                                </tr>
-                            </tboby>
-                        </table>
-
-                        <br>
-                        <hr>
-                        <div>
-                            <a th:href="@{/new}" >Create new user</a><br>
-                            <a href="/logout">Logout</a><br>
-                            <a href="/">Main page</a><br>
+                                            <th>
+                                                <form th:method="POST" th:action="@{/admin/delete?id={id}(id=${user.getId()})}" th:object="${user}">
+                                                    <input type="submit" value="Delete"/>
+                                                </form>
+                                            </th>
+                                        </tr>
+                                    </tboby>
+                                </table>
+                                <br>
+                                <hr>
+                                <div>
+                                    <a th:href="@{/new}" >Create new user</a><br>
+                                    <a href="/logout">Logout</a><br>
+                                    <a href="/">Main page</a><br>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/new">Новый пользователь</a>
+            </li>
+        </ul>
     </body>
 </html>
