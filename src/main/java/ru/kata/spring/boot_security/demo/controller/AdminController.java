@@ -39,28 +39,27 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam("id") Long id) {
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/edit")
     public String updateUser(@ModelAttribute("user") User user){
-
         userService.updateUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public String editUser(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("user", userService.showUser(id));
-        return "edit";
-    }
+//    @GetMapping("/edit")
+//    public String editUser(Model model, @RequestParam("id") Long id) {
+//        model.addAttribute("user", userService.showUser(id));
+//        return "edit";
+//    }
 
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user, ModelMap model) {
-        model.addAttribute("userNew", new User());
-        return "new";
-    }
+//    @GetMapping("/new")
+//    public String newUser(@ModelAttribute("user") User user, ModelMap model) {
+//        model.addAttribute("userNew", new User());
+//        return "new";
+//    }
 }

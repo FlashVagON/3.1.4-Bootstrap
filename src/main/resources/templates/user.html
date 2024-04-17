@@ -15,17 +15,36 @@
         <title>User Page</title>
     </head>
     <body>
+    <div class="hstack gap-3 bg-gradient bg-dark-subtle text-light-emphasis">
+        <div class="p-2 bg-gradient">Welcome to user page,</div>
+        <span class="badge bg-secondary" sec:authentication="name">User</span>
+        <div class="p-2 ms-auto"><span><a role="button" class="nav-link" href="/logout">Logout</a></span></div>
+    </div>
+    <div class="row mt-4"  >
+        <div class="col-md-2 m-0 p-0" style="height: min-content;">
+            <ul class="nav nav-pills flex-column">
+                <span th:each="role : ${userInfo.getRoles}">
+                <li class="nav-item" th:if="${role.getName()} == 'ROLE_ADMIN'">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item" th:if="${role.getName()} == 'ROLE_USER'">
+                    <a class="nav-link active" href="#">User</a>
+                </li>
+                </span>
+            </ul>
+        </div>
+        <div class="col-md-8" style="background-color: rgb(248, 249, 250);">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     <div class="jumbotron">
-                        <h1><a sec:authentication="name">User</a>, welcome spring boot security page!</h1><br>
                         <h3 class="pb-4 mb-4  border-bottom">
                             User info
                         </h3>
                         <table class="table table-success table-striped-columns" th:object="${userInfo}">
                             <thead>
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Surname</th>
                                 <th scope="col">Age</th>
@@ -34,21 +53,26 @@
                             </thead>
                             <tbody>
                             <tr th:object="${userInfo}">
-                                <td th:text="${userInfo.getUsername()}"></td>
-                                <td th:text="${userInfo}">Surname</td>
-                                <td th:text="${userInfo}">Surname</td>
+                                <td sec:authentication="principal.id" scope="row">ID</td>
+                                <td sec:authentication="principal.name" >Name</td>
+                                <td sec:authentication="principal.surname">SecondName</td>
+                                <td sec:authentication="principal.age" >AGE</td>
+                                <td><span th:each="role : ${userInfo.getRoles()}">
+                                    <span th:if="${role.getName()} == 'ROLE_ADMIN'">ADMIN</span>
+                                    <span th:if="${role.getName()} == 'ROLE_USER'">USER</span>
+                                </span></td>
 <!--                                <td sec:authentication="principal.authorities">no Roles</td>-->
                             </tr>
                             </tbody>
                         </table>
-
                         <div class="btn-group">
-                            <a class="btn btn-primary" href="/">Main page</a><br>
-                            <a class="btn btn-primary" href="/logout">Logout</a>
+                            <a class="btn btn-primary" href="/">Main page</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </body>
 </html>

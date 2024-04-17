@@ -17,7 +17,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     <div class="jumbotron">
                         <div class="alert alert-primary" role="alert">
                             <h3><span >Welcome to Index PAGE!</span></h3>
@@ -30,7 +30,7 @@
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a class="btn btn-primary" role="button" href="/admin">Admin page</a>
                             </div>
-                            <a class="btn btn-primary" role="button" href="/user">User page</a>
+                                <a class="btn btn-primary" role="button" href="/user">User page</a>
                             <div sec:authorize="isAuthenticated()">
                                 <a class="btn btn-primary" role="button" href="/logout">Logout</a>
                             </div>
